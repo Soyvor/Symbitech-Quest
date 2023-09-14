@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Coder - Clue 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <span id="timer">40:00</span>
+            <span style="flex-grow: 1; text-align: center;">Clue 1</span>
+            <button id="exit-button" onclick="showPasswordOverlay()">Exit</button>
+        </div>
+    </header>
+
+    <div id="questContainer">
+        <!-- Your clue content goes here -->
+        <h1>Clue 1</h1>
+        <p>Find the hidden treasure!</p>
+        <!-- Timer display -->
+        <div id="timer">00:00</div>
+        <!-- Button to submit quest -->
+        <button id="submitQuestButton">Submit Quest</button>
+    </div>
+
+    <!-- Add your clue content here -->
+<!-- Password Overlay  -->
+    <div id="passwordOverlay" class="instructions-overlay">
+        <div class="instructions-card">
+            <div class="instructions-card-header">
+                <span>Enter Password to Exit</span>
+                <button class="close-button" onclick="dismissPasswordOverlay()">Close</button>
+            </div>
+            <div class="instructions-card-body">
+                <input type="password" id="exitPassword" placeholder="Enter Password">
+                <button onclick="exitFullScreen()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

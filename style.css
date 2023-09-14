@@ -1,0 +1,232 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Literata:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Google+Sans:400,500');
+
+/* Global styles */
+body {
+    font-family: "Literata", sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header styles */
+.header {
+    font-family: "Google Sans", sans-serif;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1E88E5;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.instructions-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.instructions-button:hover {
+    background-color: #555;
+}
+
+.logo {
+    max-width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+.centered-content {
+    text-align: center;
+    position: relative; /* Added to make positioning easier */
+    top: 20px; /* Adjust this value to move the content up */
+}
+  
+.club-name {
+    font-family: "Google Sans", sans-serif;
+    font-weight: 800; /* Dramatic font-weight */
+    font-size: 50px; /* Larger font size */
+    margin-top: 2px; /* Decreased margin-top for GDSC SIT */
+}
+  
+.full-name {
+    font-family: "Google Sans", sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    margin-top: 2px; /* Decreased margin-top for the full name */
+}
+  
+.institute-name {
+    font-family: "Google Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin-top: 0.1px; /* Adjusted margin-top for the institute name */
+}
+  
+
+.welcome-message {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.instructions-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    z-index: 2000; /* Ensure it's above other content */
+  }
+  
+  /* Style for the instructions card */
+  .instructions-card {
+    width: 80%;
+    max-width: 500px;
+    background-color: #fff; /* White background for the card */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Box shadow for the card */
+    border-radius: 5px;
+    text-align: center; /* Center text horizontally */
+  }
+
+.instructions-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1E88E5;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.instructions-card-body {
+    padding: 20px;
+}
+
+.rules-list {
+    list-style-type: square;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* Bubble animation styles */
+.bubbles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* CSS for body and bubbles container */
+body {
+    overflow: hidden; /* Hide horizontal and vertical scrollbars */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .bubbles-container {
+    position: fixed; /* Keep the container fixed within the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow interaction with elements beneath */
+  }
+  
+  /* Define bubble styles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatBubbles 6s linear infinite;
+    opacity: 0.7;
+  }
+  
+  /* Bubble colors */
+  .bubble.blue {
+    background-color: #4285F4;
+  }
+  
+  .bubble.red {
+    background-color: #EA4335;
+  }
+  
+  .bubble.yellow {
+    background-color: #FBBC04;
+  }
+  
+  .bubble.green {
+    background-color: #34A853;
+  }
+  
+@keyframes floatBubbles {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-100px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+
+#timer {
+    /* You can adjust the timer's appearance, e.g., font size, color */
+    font-size: 24px;
+    color: #fff;
+}
+
+#exit-button {
+    /* You can adjust the exit button's appearance, e.g., font size, color */
+    background-color: #FF5733;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

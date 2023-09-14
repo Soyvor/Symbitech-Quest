@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treasure Coder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Treasure Coder: The Digital Treasure Hunt</h1>
+    <button class="instructions-button" onclick="showInstructions()">Instructions</button>
+  </div>
+
+  <div class="centered-content">
+    <img class="logo" src="GDSC.png" width="400px" height="200px" alt="Google Developers Student Club Logo">
+    <h1 class="club-name">GDSC SIT</h1> <!-- Updated class and text -->
+    <h2 class="full-name">Google Developers Student Club</h2> <!-- Added full name -->
+    <h3 class="institute-name">Symbiosis Institute of Technology</h3>
+
+    <div class="welcome-message">
+      <p>Welcome to Treasure Coder</p>
+      <p>Please enter your team name to start the game:</p>
+      <input type="text" id="teamNameInput" placeholder="Enter Team Name">
+      <button onclick="startGame()" id="startbutton">Start Game</button>
+    </div>
+  </div>
+
+  <div class="bubbles-container">
+    <!-- Bubble elements will be generated using JavaScript -->
+  </div>
+
+  <!-- Instructions overlay (hidden by default) -->
+  <div id="instructionsOverlay" class="instructions-overlay">
+    <!-- Instructions card -->
+    <div class="instructions-card">
+      <!-- Instructions card header -->
+      <div class="instructions-card-header">
+        <span>Instructions</span>
+        <button class="close-button" onclick="dismissInstructions()">Close</button>
+      </div>
+      <!-- Instructions card body -->
+      <div class="instructions-card-body">
+        <ul class="rules-list">
+          <li>Participants can have a team of up to 3 members, each team will be allotted a volunteer 
+            throughout the entire event to ensure rules and regulations are being followed.</li><br>
+
+          <li>Participants are not allowed to use phones.</li><br>
+
+          <li>Participants are not allowed to access the internet by any means throughout the duration of the event.</li><br>
+
+          <li>The team with the shortest cumulative time for solving all rounds' quests will win the competition.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
