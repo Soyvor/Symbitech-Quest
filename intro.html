@@ -49,6 +49,17 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js">
+    function startGame() {
+            var teamName = document.getElementById("teamNameInput").value;
+            
+            if (teamName.trim() !== "") {
+                const fullscreenParam = "?fullscreen=true"; // Add this parameter
+                window.location.href = `clue1.html?teamName=${encodeURIComponent(teamName)}${fullscreenParam}`;
+            } else {
+                alert("Please enter a valid team name.");
+            }
+        }
+  </script>
 </body>
 </html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #code-container {
+            position: relative;
+        }
+
+        #code {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: monospace;
+        }
+
+        #code::placeholder {
+            color: #aaa;
+        }
+
+        #runButton {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #runButton:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="question">
+            A rural school is implementing a coding program to promote quality education (SDG4). They have 15 students participating. The school has a small solar-powered computer lab (SDG7) with 5 computers. Each computer uses 3 units of solar-generated electricity per hour for coding lessons.
+            <br><br>
+            Write a Python program to calculate how many hours the computer lab can run continuously on the available solar-generated electricity before running out. Please provide the numeric answer.
+            <br><br>
+            The answer to this question should be a number between 1 and 30.
+        </div>
+        <div id="code-container">
+            <textarea id="code" placeholder="Write your Python code here..."></textarea>
+        </div>
+        <button id="runButton">Run</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        document.getElementById("runButton").addEventListener("click", function () {
+            // Get the Python code from the input area
+            var code = document.getElementById("code").value;
+
+            // Create a function to capture the Python code and run it
+            var captureCode = new Function(code);
+
+            // Try running the captured code and capture any errors
+            try {
+                // Call the captured function
+                var result = captureCode();
+
+                // Display the result in the output area
+                document.getElementById("output").textContent = "Output: " + result;
+            } catch (error) {
+                // Display any errors that occur
+                document.getElementById("output").textContent = "Error: " + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

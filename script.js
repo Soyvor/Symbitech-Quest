@@ -7,14 +7,18 @@ function dismissInstructions() {
   const instructionsOverlay = document.getElementById("instructionsOverlay");
   instructionsOverlay.style.display = "none"; 
 }
-
 function startGame() {
-    var teamName = document.getElementById("teamNameInput").value;
-    if (teamName.trim() !== "") {
-        window.location.href = "clue1.html?teamName=" + encodeURIComponent(teamName);
-    } else {
-        alert("Please enter a valid team name.");
-    }
+  var teamName = document.getElementById("teamNameInput").value;
+  
+  if (teamName.trim() !== "") {
+      const fullscreenParam = "?fullscreen=true"; // Add this parameter
+      window.location.href = `clue1.html?teamName=${encodeURIComponent(teamName)}${fullscreenParam}`;
+  } else {
+      alert("Please enter a valid team name.");
+  }
+  
+  enterFullScreen(); // Enter full-screen mode AFTER navigating
+  startTimer(); 
 }
 
 // JavaScript code to generate and animate bubbles
@@ -75,26 +79,34 @@ function createBubble() {
 
 setInterval(createBubble, 100); // Create a new bubble every 0.1 second
 
-function enterFullScreen() {
-const element = document.documentElement;
+// Check for the "fullscreen" query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const isFullscreen = urlParams.get("fullscreen");
 
-if (element.requestFullscreen) {
-  element.requestFullscreen().catch((err) => {
-    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-  });
-} else if (element.mozRequestFullScreen) {
-  element.mozRequestFullScreen().catch((err) => {
-    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-  });
-} else if (element.webkitRequestFullscreen) {
-  element.webkitRequestFullscreen().catch((err) => {
-    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-  });
-} else if (element.msRequestFullscreen) {
-  element.msRequestFullscreen().catch((err) => {
-    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-  });
+if (isFullscreen) {
+    enterFullScreen(); // Request full-screen mode
 }
+
+function enterFullScreen() {
+    const element = document.documentElement;
+
+    if (element.requestFullscreen) {
+        element.requestFullscreen().catch((err) => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen().catch((err) => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen().catch((err) => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen().catch((err) => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    }
 }
 
 function showPasswordOverlay() {
@@ -154,12 +166,6 @@ if (password === "2023") {
   alert("Incorrect password. Please try again.");
 }
 passwordInput.value = "";
-}
-
-function startGame() {
-  enterFullScreen();
-  window.location.href = "clue1.html";
-  startTimer(); 
 }
 
 function submitQuest() {

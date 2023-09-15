@@ -123,93 +123,100 @@ function submitQuest() {
     }
 }
 
-let audio; 
+let audio;
 function showCorrectAnswerMessage() {
-    const messageOverlay = document.createElement("div");
-    messageOverlay.classList.add("message-overlay");
+  const messageOverlay = document.createElement("div");
+  messageOverlay.classList.add("message-overlay");
 
-    const messageCard = document.createElement("div");
-    messageCard.classList.add("message-card");
+  const messageCard = document.createElement("div");
+  messageCard.classList.add("message-card");
 
-    // Create a custom header
-    const messageHeader = document.createElement("div");
-    messageHeader.classList.add("message-header");
+  // Create the message body
+  const messageBody = document.createElement("div");
+  messageBody.classList.add("message-body");
 
-    const headerText = document.createElement("div");
-    headerText.classList.add("custom-header");
-    headerText.innerHTML = '<span class="gdsc-sit">GDSC SIT</span><button class="close-button">X</button>';
-    messageHeader.appendChild(headerText);
+  // Create a container for GDSC SIT
+  const gdscContainer = document.createElement("div");
+  gdscContainer.classList.add("gdsc-container");
 
-    // Create the message body
-    const messageBody = document.createElement("div");
-    messageBody.classList.add("message-body");
+  const gdscSpan = document.createElement("span");
+  gdscSpan.classList.add("gdsc-sit");
+  gdscSpan.textContent = "GDSC SIT";
 
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("close-button");
-    closeButton.textContent = "X";
-    closeButton.style.color = "white";
-    messageHeader.appendChild(closeButton);
+  gdscContainer.appendChild(gdscSpan);
 
-    closeButton.addEventListener("click", () => {
-        dismissMessage();
-        stopAudio();
-        clearCanvas();
-    });
+  messageBody.appendChild(gdscContainer);
 
-    const congratulationsText = document.createElement("div");
-    congratulationsText.classList.add("congratulations-text");
-    congratulationsText.textContent = "Congratulations!";
-    messageBody.appendChild(congratulationsText);
+  // Create the Congratulations! text
+  const congratulationsText = document.createElement("div");
+  congratulationsText.classList.add("congratulations-text");
+  congratulationsText.textContent = "Congratulations!";
 
-    const fireworksCanvas = document.createElement("canvas");
-    fireworksCanvas.id = "fireworksCanvas";
-    fireworksCanvas.classList.add("fireworks-canvas");
-    fireworksCanvas.width = messageOverlay.clientWidth; 
-    fireworksCanvas.height = messageOverlay.clientHeight; 
+  // Apply animation to Congratulations! text
+  congratulationsText.style.animation = "bounce 2s ease infinite";
 
-    messageCard.appendChild(fireworksCanvas);
+  messageBody.appendChild(congratulationsText);
 
-    const wonText = document.createElement("div");
-    wonText.classList.add("won-text");
-    wonText.textContent = "You've won TreasureCoder 2023";
-    messageBody.appendChild(wonText);
+  const fireworksCanvas = document.createElement("canvas");
+  fireworksCanvas.id = "fireworksCanvas";
+  fireworksCanvas.classList.add("fireworks-canvas");
+  fireworksCanvas.width = messageOverlay.clientWidth; 
+  fireworksCanvas.height = messageOverlay.clientHeight; 
 
-    const confettiCount = 2000;
-    const confettiContainer = document.createElement("div");
-    confettiContainer.classList.add("confetti-container");
+  messageCard.appendChild(fireworksCanvas);
 
-    const colors = ['#FFD700', '#FF5733', '#4CAF50', '#2196F3']; 
+  const wonText = document.createElement("div");
+  wonText.classList.add("won-text");
+  wonText.textContent = "You've won TreasureCoder 2023";
+  messageBody.appendChild(wonText);
 
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.left = `${Math.random() * 100}%`; 
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; 
-        confetti.style.animationDelay = `${Math.random() * 8}s`; 
-        confettiContainer.appendChild(confetti);
-    }
+  const confettiCount = 2000;
+  const confettiContainer = document.createElement("div");
+  confettiContainer.classList.add("confetti-container");
 
-    messageCard.appendChild(messageHeader);
-    messageCard.appendChild(messageBody);
-    messageOverlay.appendChild(messageCard);
-    messageOverlay.appendChild(confettiContainer);
+  const colors = ['#FFD700', '#FF5733', '#4CAF50', '#2196F3']; 
 
-    document.body.appendChild(messageOverlay);
+  for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = `${Math.random() * 100}%`; 
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; 
+      confetti.style.animationDelay = `${Math.random() * 8}s`; 
+      confettiContainer.appendChild(confetti);
+  }
 
-    document.addEventListener("click", function (event) {
-        if (event.target && event.target.id === "closeCorrectAnswer") {
-            dismissMessage();
-            stopAudio();
-            window.location.href = "intro.html"; 
-        }
-    });
-    
-    if (!audio) {
-        audio = new Audio('winner.mp3');
-    }
+  messageCard.appendChild(messageBody);
+  messageCard.appendChild(confettiContainer);
 
-    audio.play();
+  // Create the close button
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("final-close-button");
+  closeButton.textContent = "Close";
 
+  closeButton.addEventListener("click", () => {
+      dismissMessage();
+      stopAudio();
+      clearCanvas();
+  });
+
+  messageCard.appendChild(closeButton);
+
+  messageOverlay.appendChild(messageCard);
+  document.body.appendChild(messageOverlay);
+
+  document.addEventListener("click", function (event) {
+      if (event.target && event.target.id === "closeCorrectAnswer") {
+          dismissMessage();
+          stopAudio();
+          window.location.href = "intro.html"; 
+      }
+  });
+  
+  if (!audio) {
+      audio = new Audio('winner.mp3');
+  }
+
+  audio.play();
 }
 
 function dismissMessage() {
@@ -242,7 +249,7 @@ function showIncorrectAnswerMessage() {
     messageOverlay.classList.add("message-overlay");
   
     const messageCard = document.createElement("div");
-    messageCard.classList.add("incorrect-answer");
+    messageCard.classList.add("incorrect-message-card", "incorrect-answer");
   
     const messageHeader = document.createElement("div");
     messageHeader.classList.add("message-header");

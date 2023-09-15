@@ -55,6 +55,30 @@ public class Solution {
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js">
+        window.onload = enterFullScreen;
+
+        function enterFullScreen() {
+            const element = document.documentElement;
+
+            if (element.requestFullscreen) {
+                element.requestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen().catch((err) => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
