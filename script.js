@@ -1,19 +1,16 @@
 function showInstructions() {
-    // Show the instructions overlay
-    document.getElementById("instructionsOverlay").style.display = "flex";
+  const instructionsOverlay = document.getElementById("instructionsOverlay");
+  instructionsOverlay.style.display = "flex"; 
 }
 
 function dismissInstructions() {
-    // Hide the instructions overlay
-    document.getElementById("instructionsOverlay").style.display = "none";
+  const instructionsOverlay = document.getElementById("instructionsOverlay");
+  instructionsOverlay.style.display = "none"; 
 }
-function startGame() {
-    // Get the team name entered by the player
-    var teamName = document.getElementById("teamNameInput").value;
 
-    // Check if the team name is not empty
+function startGame() {
+    var teamName = document.getElementById("teamNameInput").value;
     if (teamName.trim() !== "") {
-        // Redirect the player to the game interface with their team name
         window.location.href = "clue1.html?teamName=" + encodeURIComponent(teamName);
     } else {
         alert("Please enter a valid team name.");
@@ -42,11 +39,11 @@ function createBubble() {
   let isOverlapping = false;
 
   // Generate bubble positions until it's not overlapping with the header or text
-    do {
+  do {
     startPositionX = Math.random() * window.innerWidth;
     startPositionY = Math.random() * window.innerHeight;
     
-    // Check if the bubble is overlapping with the header or text
+    // Check if the bubble is overlapping with the header
     const bubbleRect = bubble.getBoundingClientRect();
     const headerRect = header.getBoundingClientRect();
     const textRect = textContent.getBoundingClientRect();
@@ -55,7 +52,7 @@ function createBubble() {
       startPositionX + bubbleRect.width < headerRect.left ||
       startPositionX > headerRect.right ||
       startPositionY + bubbleRect.height < headerRect.bottom ||
-      startPositionY > textRect.top // Changed from textRect.bottom to textRect.top
+      startPositionY > textRect.top
     ) {
       isOverlapping = false;
     } else {
@@ -78,96 +75,193 @@ function createBubble() {
 
 setInterval(createBubble, 100); // Create a new bubble every 0.1 second
 
-
-
-// Function to enter full screen mode
 function enterFullScreen() {
-  const element = document.documentElement; // Get the HTML element
+const element = document.documentElement;
 
-  if (element.requestFullscreen) {
-    element.requestFullscreen().catch((err) => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-    });
-  } else if (element.mozRequestFullScreen) {
-    element.mozRequestFullScreen().catch((err) => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-    });
-  } else if (element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen().catch((err) => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-    });
-  } else if (element.msRequestFullscreen) {
-    element.msRequestFullscreen().catch((err) => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-    });
-  }
+if (element.requestFullscreen) {
+  element.requestFullscreen().catch((err) => {
+    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+  });
+} else if (element.mozRequestFullScreen) {
+  element.mozRequestFullScreen().catch((err) => {
+    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+  });
+} else if (element.webkitRequestFullscreen) {
+  element.webkitRequestFullscreen().catch((err) => {
+    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+  });
+} else if (element.msRequestFullscreen) {
+  element.msRequestFullscreen().catch((err) => {
+    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+  });
+}
 }
 
-// Function to start the game and enter full screen mode
-function startGame() {
-  enterFullScreen();
-
-  // Add your game logic here
-
-  // Open clue1.html in fullscreen mode
-  window.location.href = "clue1.html";
+function showPasswordOverlay() {
+  const passwordOverlay = document.getElementById("passwordOverlay");
+  passwordOverlay.style.display = "flex";
 }
 
-
-function exitFullScreen() {
-  // Check the password
-  const passwordInput = document.getElementById("exitPassword");
-  const password = passwordInput.value.trim();
-
-  // Replace "YourPassword" with your actual password
-  if (password === "2023") {
-    // Exit full screen mode
-    document.exitFullscreen();
-    
-    // Hide the quest and password overlay
-    const questContainer = document.getElementById("questContainer");
-    questContainer.style.display = "none";
-    const passwordOverlay = document.getElementById("passwordOverlay");
-    passwordOverlay.style.display = "none";
-
-    // Show the "Start Game" button again
-    const startButton = document.getElementById("startGameButton");
-    startButton.style.display = "block";
-  } else {
-    alert("Incorrect password. Please try again.");
-  }
-
-  // Clear the password input
-  passwordInput.value = "";
+function dismissPasswordOverlay() {
+  const passwordOverlay = document.getElementById("passwordOverlay");
+  passwordOverlay.style.display = "none";
 }
 
-// Event listener for the "Start Game" button
-document.getElementById("startGameButton").addEventListener("click", enterFullScreen);
+let timerInterval;
+let time = 40 * 60; 
 
-// Set the initial time (40 minutes in seconds)
-let time = 40 * 60;
-
-// Function to update the timer
 function updateTimer() {
-  const timerElement = document.getElementById("timer");
+  const timerElement = document.getElementById("timer"); 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-  // Check if time is up
   if (time <= 0) {
       clearInterval(timerInterval);
       timerElement.textContent = "Time's up!";
-      // Add your game over logic here
   }
 
   time--;
 }
 
-// Update the timer every second
-const timerInterval = setInterval(updateTimer, 1000);
 
-// Function to exit the game
-function exitGame() {
-  // Add your exit game logic here
+function startTimer() {
+    if (!timerInterval) {
+        timerInterval = setInterval(updateTimer, 1000);
+    }
 }
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+startTimer();
+
+function exitGame() {
+stopTimer();
+}
+
+function exitFullScreen() {
+const passwordInput = document.getElementById("exitPassword");
+const password = passwordInput.value.trim();
+
+if (password === "2023") {
+  document.exitFullscreen();
+  stopTimer();
+  window.location.href = "intro.html";
+} else {
+  alert("Incorrect password. Please try again.");
+}
+passwordInput.value = "";
+}
+
+function startGame() {
+  enterFullScreen();
+  window.location.href = "clue1.html";
+  startTimer(); 
+}
+
+function submitQuest() {
+  const userAnswer = document.getElementById("answerInput").value;
+  const expectedAnswer = 30; 
+  if (parseInt(userAnswer) === expectedAnswer) {
+    showCorrectAnswerMessage();
+    stopTimer(); 
+  } else {
+    showIncorrectAnswerMessage();
+  }
+}
+
+
+// Function to show a correct answer message
+function showCorrectAnswerMessage() {
+  const messageOverlay = document.createElement("div");
+  messageOverlay.classList.add("message-overlay");
+
+  const messageCard = document.createElement("div");
+  messageCard.classList.add("message-card", "correct-answer");
+
+  const messageHeader = document.createElement("div");
+  messageHeader.classList.add("message-header");
+
+  const headerText = document.createElement("span");
+  headerText.textContent = "Congratulations!";
+  messageHeader.appendChild(headerText);
+
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("close-button");
+  closeButton.textContent = "Close";
+  closeButton.addEventListener("click", dismissMessage);
+  messageHeader.appendChild(closeButton);
+
+  const messageBody = document.createElement("div");
+  messageBody.classList.add("message-body");
+  messageBody.textContent = "You've provided the correct answer. Well done!";
+
+  messageCard.appendChild(messageHeader);
+  messageCard.appendChild(messageBody);
+  messageOverlay.appendChild(messageCard);
+
+  // Add confetti elements to the message overlay and set their initial positions
+  const confettiCount = 2000;
+  const confettiContainer = document.createElement("div");
+  confettiContainer.classList.add("confetti-container");
+
+  const colors = ['#FFD700', '#FF5733', '#4CAF50', '#2196F3']; // Add your desired colors
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = `${Math.random() * 100}%`; // Random horizontal position
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Random color
+    confetti.style.animationDelay = `${Math.random() * 8}s`; // Adjust animation delay for longer falling time
+    confettiContainer.appendChild(confetti);
+  }
+
+  messageOverlay.appendChild(confettiContainer);
+
+  document.body.appendChild(messageOverlay);
+}
+
+// Function to show an incorrect answer message
+function showIncorrectAnswerMessage() {
+  const messageOverlay = document.createElement("div");
+  messageOverlay.classList.add("message-overlay");
+
+  const messageCard = document.createElement("div");
+  messageCard.classList.add("message-card", "incorrect-answer");
+
+  const messageHeader = document.createElement("div");
+  messageHeader.classList.add("message-header");
+
+  const headerText = document.createElement("span");
+  headerText.textContent = "Incorrect Answer";
+  messageHeader.appendChild(headerText);
+
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("close-button");
+  closeButton.textContent = "Close";
+  closeButton.addEventListener("click", dismissMessage);
+  messageHeader.appendChild(closeButton);
+
+  const messageBody = document.createElement("div");
+  messageBody.classList.add("message-body");
+  messageBody.textContent = "Sorry, your answer is incorrect. Please try again.";
+
+  messageCard.appendChild(messageHeader);
+  messageCard.appendChild(messageBody);
+  messageOverlay.appendChild(messageCard);
+
+  document.body.appendChild(messageOverlay);
+}
+
+function dismissMessage() {
+  const messageOverlay = document.querySelector(".message-overlay");
+  if (messageOverlay) {
+      messageOverlay.remove();
+  }
+}
+
+const submitButton = document.getElementById("submitQuestButton");
+submitButton.addEventListener("click", submitQuest);
