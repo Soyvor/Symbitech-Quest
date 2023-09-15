@@ -7,7 +7,7 @@ function dismissInstructions() {
     const instructionsOverlay = document.getElementById("instructionsOverlay");
     instructionsOverlay.style.display = "none"; // Hide the overlay
 }
-  
+
 function startGame() {
       var teamName = document.getElementById("teamNameInput").value;
       if (teamName.trim() !== "") {
@@ -66,7 +66,6 @@ function updateTimer() {
   
     time--;
 }
-  
   
 function startTimer() {
       if (!timerInterval) {
