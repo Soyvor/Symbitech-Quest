@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treasure Coder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Treasure Coder: The Digital Treasure Hunt</h1>
+    <button class="instructions-button" onclick="showInstructions()">Instructions</button>
+  </div>
+
+  <div class="centered-content">
+    <img class="logo" src="GDSC.png" width="400px" height="200px" alt="Google Developers Student Club Logo">
+    <h1 class="club-name">GDSC SIT</h1> 
+    <h2 class="full-name">Google Developers Student Club</h2> 
+    <h3 class="institute-name">Symbiosis Institute of Technology</h3>
+
+    <div class="welcome-message">
+      <p>Welcome to Treasure Coder</p>
+      <p>Please enter your team name to start the game</p>
+      <input type="text" id="teamNameInput" placeholder="Enter Team Name">
+      <button onclick="startGame()" id="startbutton">Start Game</button>
+    </div>
+  </div>
+
+  <div id="instructionsOverlay" class="instructions-overlay">
+    <div class="instructions-card">
+      <div class="instructions-card-header">
+        <span>Instructions</span>
+        <button class="close-button" onclick="dismissInstructions()">Close</button>
+      </div>
+      <div class="instructions-card-body">
+        <ul class="rules-list">
+          <li>Participants can have a team of up to 3 members, each team will be allotted a volunteer 
+            throughout the entire event to ensure rules and regulations are being followed.</li><br>
+
+          <li>Participants are not allowed to use phones.</li><br>
+
+          <li>Participants are not allowed to access the internet by any means throughout the duration of the event.</li><br>
+
+          <li>The team with the shortest cumulative time for solving all rounds' quests will win the competition.</li><br>
+
+          <li>The overall game winner is determined by the team with the shortest cumulative 
+            time across all rounds, not necessarily the winners of individual rounds.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bubbles-container"></div>
+
+  <script src="script.js">
+    function startGame() {
+            var teamName = document.getElementById("teamNameInput").value;
+            
+            if (teamName.trim() !== "") {
+                const fullscreenParam = "?fullscreen=true"; // Add this parameter
+                window.location.href = `clue1.html?teamName=${encodeURIComponent(teamName)}${fullscreenParam}`;
+            } else {
+                alert("Please enter a valid team name.");
+            }
+        }
+  </script>
+</body>
+</html>
