@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Coder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <span id="timer">40:00</span>
+            <span style="flex-grow: 1; text-align: center;">TreasureCoder</span>
+            <button id="exit-button" onclick="showPasswordOverlay()">Exit</button>
+        </div>
+    </header>
+
+    <div>
+            <h1 style="text-align: left; font-size: 40px; padding: 20px; margin-bottom: 2px;">Task-2</h1>
+            <p class="task">Find the missing Part 0.5,1.5,4.5,13.5,___</p>
+            <p class="question"> Write the Suggested Number in the box</p>
+        </div>
+    
+    <div class="clue-image">
+        <div class="input-container">
+            <input type="text" id="answerInput" placeholder="Enter your answer" style="width: 150px;">
+            <button id="submitQuestButton">Submit Quest</button>
+        </div>
+    </div>
+
+<!-- Password Overlay  -->
+    <div id="passwordOverlay" class="instructions-overlay">
+        <div class="instructions-card">
+            <div class="instructions-card-header">
+                <span>Enter Password to Exit</span>
+                <button class="close-button" onclick="dismissPasswordOverlay()">Close</button>
+            </div>
+            <div class="instructions-card-body">
+                <input type="password" id="exitPassword" placeholder="Enter Password">
+                <button onclick="exitFullScreen()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Clue2.js"></script>
+</body>
+</html>
